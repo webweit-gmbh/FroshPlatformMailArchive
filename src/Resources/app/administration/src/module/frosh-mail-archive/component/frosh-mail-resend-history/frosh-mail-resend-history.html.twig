@@ -25,24 +25,7 @@
             </template>
 
             <template #column-success="{item}">
-                <div>
-                    <sw-color-badge
-                        v-if="item.transportState === 'sent' || item.transportState === 'resent'"
-                        color="#37d046"
-                        rounded
-                    />
-                    <sw-color-badge
-                        v-else-if="item.transportState === 'failed'"
-                        color="#de294c"
-                        rounded
-                    />
-                    <sw-color-badge
-                        v-else
-                        color="#ffab22"
-                        rounded
-                    />
-                    {{ translateState(item.transportState) }}
-                </div>
+                <frosh-mail-transport-state :transport-state="item.transportState"/>
             </template>
 
             <template #actions="{ item }">

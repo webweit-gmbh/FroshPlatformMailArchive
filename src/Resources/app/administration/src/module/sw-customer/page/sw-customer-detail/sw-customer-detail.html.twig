@@ -1,0 +1,19 @@
+{% block sw_customer_detail_content_tab_after %}
+{% block sw_customer_detail_content_tab_mail %}
+<sw-tabs-item
+    v-tooltip="{
+                    message: $tc('sw-privileges.tooltip.warning'),
+                    showOnDisabledElements: true,
+                    disabled: acl.can('frosh_mail_archive:read')
+                }"
+    class="sw-customer-detail__tab-mail"
+    :disabled="!acl.can('frosh_mail_archive:read')"
+    :route="froshArchiveMailsRoute"
+    :title="$tc('frosh-mail-archive.sw-customer.labelMailTab')"
+>
+    {{ $tc('frosh-mail-archive.sw-customer.labelMailTab') }}
+</sw-tabs-item>
+{% endblock %}
+
+{% parent() %}
+{% endblock %}

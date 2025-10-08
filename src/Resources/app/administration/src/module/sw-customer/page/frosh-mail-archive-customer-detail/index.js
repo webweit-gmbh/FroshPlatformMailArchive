@@ -1,20 +1,21 @@
 const { Component, Mixin } = Shopware;
 const { Criteria } = Shopware.Data;
 
-import template from './frosh-mail-archive-index.twig';
-import './frosh-mail-archive-index.scss';
+import template from './frosh-mail-archive-customer-detail.html.twig';
+import './frosh-mail-archive-customer-detail.scss';
 
-Component.register('frosh-mail-archive-index', {
+Component.register('frosh-mail-archive-customer-detail', {
     template,
 
     inject: ['repositoryFactory', 'filterFactory'],
 
     mixins: [Mixin.getByName('listing')],
 
-    metaInfo() {
-        return {
-            title: this.$createTitle(),
-        };
+    props: {
+        customer: {
+            type: Object,
+            required: true,
+        },
     },
 
     data() {
@@ -24,12 +25,8 @@ Component.register('frosh-mail-archive-index', {
             sortDirection: 'DESC',
             filterCriteria: [],
             isLoading: true,
-            storeKey: 'frosh-mail-archive-listing',
-            defaultFilters: [
-                'transport-state-filter',
-                'saleschannel-filter',
-                'customer-filter',
-            ],
+            storeKey: 'frosh-mail-archive-customer-listing',
+            defaultFilters: ['transport-state-filter'],
         };
     },
 
@@ -39,6 +36,10 @@ Component.register('frosh-mail-archive-index', {
             defaultCriteria.setTerm(this.term);
             defaultCriteria.addSorting(
                 Criteria.sort(this.sortBy, this.sortDirection)
+            );
+
+            defaultCriteria.addFilter(
+                Criteria.equals('customerId', this.customer.id)
             );
 
             this.filterCriteria.forEach((filter) => {
@@ -82,25 +83,6 @@ Component.register('frosh-mail-archive-index', {
                         'frosh-mail-archive.list.sidebar.filters.transportStatePlaceholder'
                     ),
                     options: this.transportStateOptions,
-                },
-                'saleschannel-filter': {
-                    property: 'salesChannel',
-                    label: this.$tc(
-                        'frosh-mail-archive.list.sidebar.filters.salesChannelLabel'
-                    ),
-                    placeholder: this.$tc(
-                        'frosh-mail-archive.list.sidebar.filters.salesChannelPlaceholder'
-                    ),
-                },
-                'customer-filter': {
-                    property: 'customer',
-                    labelProperty: ['firstName', 'lastName'],
-                    label: this.$tc(
-                        'frosh-mail-archive.list.sidebar.filters.customerLabel'
-                    ),
-                    placeholder: this.$tc(
-                        'frosh-mail-archive.list.sidebar.filters.customerPlaceholder'
-                    ),
                 },
             });
         },

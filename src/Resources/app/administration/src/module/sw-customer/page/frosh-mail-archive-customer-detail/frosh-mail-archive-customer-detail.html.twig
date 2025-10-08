@@ -1,0 +1,35 @@
+<div class="frosh-mail-archive-customer-detail">
+    <sw-card :large="true">
+        <div class="frosh-mail-archive-customer-detail__content">
+            <div class="frosh-mail-archive-customer-detail__main-content">
+                <frosh-mail-archive-listing
+                    :items="items"
+                    :isLoading="isLoading"
+                    :sort-by="currentSortBy"
+                    :sort-direction="sortDirection"
+                    @refresh-items="getList"
+                    @open-detail="openDetail"
+                    @page-change="onPageChange"
+                    @column-sort="onSortColumn"
+                />
+            </div>
+            <div class="frosh-mail-archive-customer-detail__sidebar">
+                <sw-sidebar>
+                    <sw-sidebar-item
+                        icon="regular-undo"
+                        :title="$tc('frosh-mail-archive.list.sidebar.refresh')"
+                        @click="onRefresh"
+                    >
+                    </sw-sidebar-item>
+                    <sw-sidebar-filter-panel
+                        entity="frosh_mail_archive"
+                        :store-key="storeKey"
+                        :filters="listFilters"
+                        :defaults="defaultFilters"
+                        @criteria-changed="updateCriteria"
+                    />
+                </sw-sidebar>
+            </div>
+        </div>
+    </sw-card>
+</div>

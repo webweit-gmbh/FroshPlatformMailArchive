@@ -1,0 +1,24 @@
+@import '~scss/variables';
+
+.frosh-mail-archive-customer-detail {
+    .sw-card__content {
+        overflow-x: hidden;
+    }
+
+    .frosh-mail-archive-customer-detail__content {
+        position: relative;
+        height: 100%;
+        min-height: 500px;
+        display: grid;
+        grid-template-columns: 1fr auto;
+    }
+
+    .frosh-mail-archive-customer-detail__main-content {
+        position: relative;
+        height: 100%;
+    }
+
+    .sw-data-grid {
+        position: relative;
+    }
+}

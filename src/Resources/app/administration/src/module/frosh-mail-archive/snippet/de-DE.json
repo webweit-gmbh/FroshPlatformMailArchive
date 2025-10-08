@@ -24,14 +24,13 @@
             },
             "sidebar": {
                 "refresh": "Neuladen",
-                "filter": "Filter",
                 "filters": {
-                    "search": "Suche",
-                    "customer": "Kunde",
-                    "salesChannel": "Verkaufskanal",
+                    "customerLabel": "Kunden",
+                    "customerPlaceholder": "Kunden auswählen",
+                    "salesChannelLabel": "Verkaufskanal",
+                    "salesChannelPlaceholder": "Verkaufskanal auswählen",
                     "transportStateLabel": "Status",
-                    "transportStatePlaceholder": "Status auswählen",
-                    "resetFilter": "Filter zurücksetzen"
+                    "transportStatePlaceholder": "Status auswählen"
                 }
             }
         },
@@ -83,6 +82,9 @@
                 "currently-selected": "ausgewählt",
                 "title": "Sendeverlauf"
             }
+        },
+        "sw-customer": {
+            "labelMailTab": "Mails"
         }
     }
 }

@@ -1,0 +1,20 @@
+<div>
+    <sw-color-badge
+        v-if="transportState === 'sent' || transportState === 'resent'"
+        color="#37d046"
+        rounded
+    />
+    <sw-color-badge
+        v-else-if="transportState === 'failed'"
+        color="#de294c"
+        rounded
+    />
+    <sw-color-badge
+        v-else
+        color="#ffab22"
+        rounded
+    />
+    <span>
+        {{ translateState(transportState) }}
+    </span>
+</div>
