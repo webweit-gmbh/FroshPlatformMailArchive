@@ -1,0 +1,90 @@
+<sw-entity-listing
+    ref="table"
+    v-if="items"
+    :items="items"
+    :columns="columns"
+    :isLoading="isLoading"
+    :repository="froshMailArchiveRepository"
+    :sort-by="currentSortBy"
+    :sort-direction="sortDirection"
+    @selection-change="onSelectionChanged"
+    @page-change="onPageChange"
+    @column-sort="onSortColumn"
+>
+    <template #column-receiver="{ item }">
+        <span v-for="(element, index) in item.receiver">
+            {{ element }}
+            &lt;
+            <a :href="'`mailto:${index}`'">{{ index }}</a>
+            &gt;
+        </span>
+    </template>
+
+    <template #column-createdAt="{ item, column }">
+        <a @click="openDetail(item)">
+            {{ date(item.createdAt, {hour: '2-digit', minute: '2-digit', second: '2-digit'}) }}
+        </a>
+    </template>
+
+    <template #column-transportState="{ item }">
+        <frosh-mail-transport-state :transport-state="item.transportState"></frosh-mail-transport-state>
+        <template v-if="item.transportState === 'failed'">
+            <sw-icon
+                name="regular-exclamation-triangle"
+                color="#f00"
+                class="frosh-mail-archive__data-grid-danger-icon"
+                v-tooltip="{ message: $tc('frosh-mail-archive.list.columns.transportFailed') }"
+                small
+                deprecated
+            ></sw-icon>
+            <sw-button
+                square
+                size="small"
+                variant="context"
+                @click="resendMail(item)"
+                deprecated
+            >
+                <sw-icon
+                    name="regular-undo"
+                    class="frosh-mail-archive__data-grid-danger-icon"
+                    v-tooltip="{ message: $tc('frosh-mail-archive.list.actions.resendAction') }"
+                    small
+                    deprecated
+                ></sw-icon>
+            </sw-button>
+        </template>
+    </template>
+
+    <template #detail-action="{ item }">
+        <sw-context-menu-item
+            class="sw-entity-listing__context-menu-show-action"
+            @click="openDetail(item)"
+        >
+            {{ $tc('frosh-mail-archive.list.actions.showAction') }}
+        </sw-context-menu-item>
+        <sw-context-menu-item
+            class="sw-entity-listing__context-menu-show-action"
+            @click="resendMail(item)"
+        >
+            {{ $tc('frosh-mail-archive.list.actions.resendAction') }}
+        </sw-context-menu-item>
+    </template>
+
+    <template #bulk-additional="{ selectionCount }">
+        <a
+            v-if="selectionCount > 0"
+            class="link link-primary"
+            @click="onBulkResendClick"
+        >
+            {{ $tc('frosh-mail-archive.list.actions.bulkResendAction') }}
+            <sw-icon
+                name="regular-exclamation-triangle"
+                color="orange"
+                class="frosh-mail-archive__data-grid-warning-icon"
+                v-tooltip="{ message: $tc('frosh-mail-archive.list.actions.bulkResendWarningTooltip') }"
+                small
+                deprecated
+            ></sw-icon>
+        </a>
+    </template>
+</sw-entity-listing>

@@ -24,14 +24,13 @@
             },
             "sidebar": {
                 "refresh": "Refresh",
-                "filter": "Filter",
                 "filters": {
-                    "search": "Search",
-                    "customer": "Customer",
-                    "salesChannel": "Sales Channel",
+                    "customerLabel": "Customer",
+                    "customerPlaceholder": "Select customer",
+                    "salesChannelLabel": "Sales channel",
+                    "salesChannelPlaceholder": "Select sales channel",
                     "transportStateLabel": "State",
-                    "transportStatePlaceholder": "Select state",
-                    "resetFilter": "Reset filter"
+                    "transportStatePlaceholder": "Select state"
                 }
             }
         },
@@ -83,6 +82,9 @@
                 "currently-selected": "this",
                 "title": "Resend history"
             }
+        },
+        "sw-customer": {
+            "labelMailTab": "Mails"
         }
     }
 }
