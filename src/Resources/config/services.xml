@@ -6,6 +6,14 @@
 
     <services>
         <defaults autowire="true" autoconfigure="true"/>
-        <prototype namespace="Frosh\MailArchive\" resource="../../"/>
+        <prototype namespace="Frosh\MailArchive\" resource="../../"
+                   exclude="../../Decorator/MailerTransportLoaderDecorator.php"/>
+
+        <service id="Frosh\MailArchive\Decorator\MailerTransportLoaderDecorator"
+                 decorates="Shopware\Commercial\B2B\QuoteManagement\Domain\Mail\QuoteMailerTransportLoaderDecorator"
+                 decoration-on-invalid="ignore">
+            <argument type="service" id=".inner"/>
+            <argument type="service" id="event_dispatcher"/>
+        </service>
     </services>
 </container>
