@@ -74,3 +74,9 @@ build:
 
 changelog:
     enabled: true
+
+validation:
+    ignore:
+        # The `version` field is intentionally omitted from composer.json in this
+        # fork, so suppress the verifier's "version is required" error.
+        - identifier: metadata.version
