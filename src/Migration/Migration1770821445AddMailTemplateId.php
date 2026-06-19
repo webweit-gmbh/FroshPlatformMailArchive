@@ -7,20 +7,19 @@ namespace Frosh\MailArchive\Migration;
 use Doctrine\DBAL\Connection;
 use Shopware\Core\Framework\Migration\MigrationStep;
 
-class Migration1690743548AddEmlPath extends MigrationStep
+class Migration1770821445AddMailTemplateId extends MigrationStep
 {
     public function getCreationTimestamp(): int
     {
-        return 1690743548;
+        return 1770821445;
     }
 
     public function update(Connection $connection): void
     {
-        if ($this->columnExists($connection, 'frosh_mail_archive', 'eml_path')) {
+        if ($this->columnExists($connection, 'frosh_mail_archive', 'mail_template_id')) {
             return;
         }
-        $connection->executeStatement('ALTER TABLE `frosh_mail_archive`
-                                            ADD `eml_path` varchar(2048) NULL;');
+        $connection->executeStatement('ALTER TABLE `frosh_mail_archive` ADD COLUMN `mail_template_id` BINARY(16) NULL');
     }
 
     public function updateDestructive(Connection $connection): void

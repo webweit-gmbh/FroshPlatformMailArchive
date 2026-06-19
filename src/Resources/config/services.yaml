@@ -1,0 +1,16 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    Frosh\MailArchive\:
+        resource: '../../'
+        exclude:
+            - '../../Decorator/MailerTransportLoaderDecorator.php'
+
+    Frosh\MailArchive\Decorator\MailerTransportLoaderDecorator:
+        decorates: 'Shopware\Commercial\B2B\QuoteManagement\Domain\Mail\QuoteMailerTransportLoaderDecorator'
+        decoration_on_invalid: ignore
+        arguments:
+            - '@.inner'
+            - '@event_dispatcher'
